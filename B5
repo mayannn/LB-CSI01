@@ -1,0 +1,59 @@
+#bai 1
+from collections import Counter
+
+def find_largest_mode(nums):
+    if not nums:
+        return None
+    count = Counter(nums)
+    max_frequency = max(count.values())
+    mode_candidates = [num for num, freq in count.items() if freq == max_frequency]
+    return max(mode_candidates)
+
+nums = [2,3,7,8,5,4,2]
+result = find_largest_mode(nums)
+print(result)  
+
+# bai 2 
+def find_ice_cream_indices(m, prices):
+    price_map = {}
+    
+    for i, price in enumerate(prices):
+        complement = m - price
+        if complement in price_map:
+            return price_map[complement], i
+        price_map[price] = i
+
+m = 7
+prices = [3,4,5,6,2]
+result = find_ice_cream_indices(m, prices)
+print(result)  
+
+#bai 3
+def has_subarray_with_sum(k, nums):
+    start = 0
+    current_sum = 0
+    
+    for end in range(len(nums)):
+        current_sum += nums[end]
+        while current_sum > k and start <= end:
+            current_sum -= nums[start]
+            start += 1
+        if current_sum == k:
+            return True
+    
+    return False
+ka = 8
+nums1 = [2,4,5,6,7]
+print(has_subarray_with_sum(ka, nums1))  
+
+kb = 7
+nums2 = [3,4,5,6,7]
+print(has_subarray_with_sum(kb, nums2))  
+
+
+
+
+
+
+
+
