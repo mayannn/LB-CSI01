@@ -1,0 +1,129 @@
+#1
+# def find_same(input_list) :
+#     price_count = {}
+#     for item in input_list:
+#         price = item["price"]
+#         if price not in price_count:
+#             price_count[price] = 1
+#         else : 
+#             price_count[price] += 1
+#     same_price_items = [item for item in input_list if price_count[item["price"]] > 1]
+#     return same_price_items
+
+# sample_input_list = [
+#     {"id": 613, "name": "Television", "price": 12000000},
+#     {"id": 982, "name": "Headphone", "price": 1000000},
+#     {"id":  24, "name": "Backpack", "price": 250000},
+#     {"id": 389, "name": "Vinamilk Icecream", "price": 35000},
+#     {"id": 432, "name": "Big Cola", "price": 20000},
+#     {"id": 678, "name": "Chocopie", "price": 20000},
+#     {"id": 354, "name": "Mint", "price": 15000}
+# ]
+
+# sample_output_list = find_same(sample_input_list)
+# print(sample_output_list)
+
+#2
+# def find_words(input) :
+#     words = input.split() # to put input string into seperated words "", ""..
+#     shortest = []
+#     min_length = float('inf')  # initialize the minimum length to infinity
+#     for char in words :
+#         if len(char) < min_length:
+#             min_length = len(char)
+#             shortest = [char]  # reset the list with the new shortest word
+#         elif len(char) == min_length :
+#             shortest.append(char)
+#         elif len(char) > min_length :
+#             shortest.append(char)
+#     # Sort the shortest list based on the length of the words and then alphabetically
+#     shortest.sort(key=lambda x: (len(x),x))
+#     return shortest
+
+# most_common_100 = "the of to and a in is it you that he was for on are with as I his they be at one have this from or had by hot but some what there we can out other were all your when up use word how said an each she which do their time if will way about many then them would write like so these her long make thing see him two has look more day could go come did my sound no most number who over know water than call first people may down side been now find"
+
+# output = find_words(most_common_100)
+# print(output)
+
+#3
+# def ascending_order_price(input_list):
+#     price_count : []
+#     min_length = float('inf')
+#     for item in input_list:
+#         price = item["price"]
+#         if price  < min_length:
+#             min_length = price
+#             price_count = [price]
+#         elif price == min_length:
+#             price_count.append(price)
+#         elif price > min_length :
+#             price_count.append(price)
+#     price_count.sort()
+#     return price_count
+
+# flower_prices = [
+#     {'name': 'Red Rose', 'price': 10000}, #1
+#     {'name': 'Lily', 'price': 12000},#3
+#     {'name': 'Orchid', 'price': 100000},#8
+#     {'name': 'Blue Rose', 'price': 20000}, #7
+#     {'name': 'Daisy', 'price': 12000},#4
+#     {'name': 'Tulip', 'price': 20000}, #5
+#     {'name': 'Chrysanthemum', 'price': 10000}, #2
+#     {'name': 'Sunflower', 'price': 20000} #6
+# ]
+
+# output_list = ascending_order_price(flower_prices)
+# print(output_list)
+
+#4
+import matplotlib.pyplot as plt
+
+def show_list(arr, title=''):
+    fig, ax = plt.subplots(figsize=(20, 4))
+    ax.bar(range(len(arr)), arr)
+    ax.set_title(title)
+    ax.set_xlabel('index')
+    ax.set_xticks(range(len(arr)))
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    plt.show()
+
+sample_number_list = [5, 9, 1, 12, 30, 35, 75, 10, 15, 20, 4, 0, 20, 0, 20, 3, 6, 14]
+
+def merge(left,right):
+    result=[]
+    i=j=0
+
+    while i < len(left) and j < len(right):
+        if left[i]<right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+def mergeSort(arr):
+    step =1 # starting with sub-arrats of length 1
+    length = len(arr)
+
+    while step<length:
+        for i in range(0,length,2*step):
+            left = arr[i:i+step]
+            right = arr[i+step:i + 2*step]
+
+            merged = merge(left,right)
+
+            # place the merge array back into the original array
+            for j, val in enumerate(merged):
+                arr[i+j] = val
+
+        step *= 2 # double the subarray length for the next iteration
+
+    return arr
+sortedArr = mergeSort(sample_number_list)
+show_list(sample_number_list, title='sample_number_list')
