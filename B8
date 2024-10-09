@@ -1,0 +1,77 @@
+# Viết một chương trình kiểm tra xem một số nguyên đầu vào có phải là số nguyên tố không.
+# def prime(n) :
+#     if n<= 1:
+#         return False
+#     #check divisibility from 2 to n-1
+#     for i in range(2,n):
+#         if n % i == 0:
+#             return False
+    
+#     return True
+
+# n = 5
+# print(prime(n))
+
+# Viết một chương trình sắp xếp một danh sách số nguyên theo thứ tự tăng dần bằng thuật toán sắp xếp Bubble Sort.
+
+# arr = [64, 34, 25, 12, 22, 11, 90]
+
+# n = len(arr)
+# for i in range(n-1):
+#     for j in range(n-i-1):
+#         if arr[j] > arr[j+1] :
+#             arr[j],arr[j+1] = arr[j+1], arr[j]
+# print(arr)
+
+# Write a program to calculate the nth Fibonacci number using recursion.
+
+# def nth_Fibonacci(n):
+#     if n <= 1 :
+#         return n
+
+#     return nth_Fibonacci(n-1) + nth_Fibonacci(n-2)
+
+# n = 5
+# result = nth_Fibonacci(n)
+# print(result)
+
+# Write a program to count the number of occurrences of each element in a list.
+
+# def occ(lst,n):
+#     count = 0
+#     for elem in lst :
+#         if (elem == n):
+#             count += 1
+#     return count
+    
+
+# lst = [1, 2, 2, 3, 4, 4, 4, 5]
+# n = 2
+# print('{} has occurred {} times'.format(n,occ(lst, n)))
+
+# Write a program that takes a string and returns the reversed string.
+# def reverse(s):
+#     str = ""
+#     for i in s :
+#         str = i + str
+#     return str
+
+# s = "heyho"
+
+# print("original :", end="")
+# print(s)
+# print("reversed :", end="")
+# print(reverse(s))
+
+# Write a program to check whether an integer is a palindrome or not.
+# def palindrome(s):
+#     str = ""
+#     for i in s :
+#         str = i + str
+
+#     if str == s :
+#         return True
+#     return False
+
+# s = "anna"
+# print(palindrome(s))
