@@ -1,0 +1,64 @@
+# Problem: Given a string of positive integers and binary operators + - * /, calculate the value of the expression in the string.
+
+# Input: An expression in the form of a string, each operator and operand are separated by exactly one space.
+
+# Output: A real number is the value of the expression. The test case ensures that all expressions are valid and have a real value.
+# For example:
+
+# Input: "2 * 3 - 20 / 5"
+# Output: 2.0
+# Explanation: 2*3 - 20/5 = 6 - 4 = 2
+# Instructions: If there is no difference in the precedence of addition, subtraction, multiplication and division, we can perform simple sequential calculations from left to right. However, because the calculations have different precedence, we can add processing steps to perform them in the correct order:
+
+# Tread the expression from left to right.
+# If you encounter an operator, perform the operators in the operator that has a higher or equal precedence than the operator under consideration.
+
+# Finally, perform the calculation on the unprocessed operators in order from right to left.
+
+# This process will be more convenient if we split the string into an array of elements and save a list of the operands and operators that have been examined.
+
+# For example: evaluate the expression 2 * 3 - 20 / 5
+
+# The first operator is *, there is no operator before it, we temporarily ignore it.
+# The next operator is -, there is a * operator before it with a higher precedence => perform the multiplication => the expression becomes 6 - 20 / 5
+# The next operator is /, there is a - operator before it but a lower precedence => ignore it.
+# Having examined the entire expression, perform the calculation in order from right to left: 6 - 20 / 5 = 6 - 4 = 2
+
+def op(s):
+    arr = s.split()
+    operators = {'+', '-','*', '/'}
+    precedence = {'+':1, '-':1, '*':2, '/':2}
+
+    #check for invalid operators
+    for token in arr: 
+        if token in operators:
+            continue
+        try:
+            float(token)
+        except ValueError:
+            raise ValueError(f"Invalid token: {token}")
+
+    #perform operations based on precedence
+    i = 0
+    while i < len(arr):
+        if arr[i] in precedence:
+            op1 = float(arr[i-1])
+            op2 = float(arr[i+1])
+            if arr[i] == "+":
+                result = op1 + op2
+            elif arr[i] == "-" :
+                result = op1 - op2
+            elif arr[i] == "*":
+                result = op1 * op2
+            elif arr[i] == "/":
+                if op2 == 0:
+                    raise ZeroDivisionError("cannot divide by 0")
+                result = op1 / op2
+            arr[i-1] = str(result)
+            del arr[i:i+2]
+            i -= 1
+        i += 1
+    return arr[0]
+
+s = "2 * 3"
+print(op(s))
